@@ -688,8 +688,8 @@ class RefineProject:
         response_json = self.do_json('reconcile', params={'columnName': column, 'config': str(reconciliation_config)})
 
         #Wait until the reconciliation service completes and returns a value
-        if response_json['code'] == 'pending':
-            self.wait_until_idle()
+        while response_json['code'] == 'pending':
+            time.sleep(0.5)
         
         return response_json
 
