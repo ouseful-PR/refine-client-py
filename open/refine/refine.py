@@ -643,7 +643,7 @@ class RefineProject:
     def get_reconciliation_service_by_name_or_url(self, name):
         recon_services = self.get_reconciliation_services()
         for recon_service in recon_services:
-            if recon_service['name'] == name or recon_service['server_url'] == name:
+            if recon_service['name'] == name or recon_service['url'] == name:
                 return recon_service
         return None
 
@@ -673,7 +673,7 @@ class RefineProject:
                 raise ValueError('Must have at least one of config or type')
             reconciliation_config = {
                 'mode': 'standard-service',
-                'service': service['server_url'],
+                'service': service['url'],
                 'identifierSpace': service['identifierSpace'],
                 'schemaSpace': service['schemaSpace'],
                 'type': {
