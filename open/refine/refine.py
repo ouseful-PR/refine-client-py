@@ -684,10 +684,14 @@ class RefineProject:
                 'columnDetails': [],
             }
         
-        #Wait until the reconciliation service completes and returns a value    
-        self.wait_until_idle()
+        #Call the reconciliation service
+        response_json = self.do_json('reconcile', params={'columnName': column, 'config': str(reconciliation_config)})
+
+        #Wait until the reconciliation service completes and returns a value
+        if response_json['code'] == 'pending':
+            self.wait_until_idle()
         
-        return self.do_json('reconcile', params={'columnName': column, 'config': str(reconciliation_config)})
+        return response_json
 
 
 class InvalidFileFormat(ValueError):
