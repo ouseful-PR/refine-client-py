@@ -683,6 +683,10 @@ class RefineProject:
                 'autoMatch': True,
                 'columnDetails': [],
             }
+        
+        #Wait until the reconciliation service completes and returns a value    
+        self.wait_until_idle()
+        
         return self.do_json('reconcile', params={'columnName': column, 'config': str(reconciliation_config)})
 
 
